@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f8ff; /* Light Blue */
+            color: #333; /* Dark text */
+        }
+        .profile {
+            max-width: 700px;
+            margin: 20px auto;
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #2196f3; /* Medium Blue */
+            margin-bottom: 20px;
+        }
+        .field {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 35px;
+        }
+        .field label {
+            font-weight: bold;
+            color: #2196f3; /* Medium Blue */
+            margin-right: 5px;
+        }
+        .field input,
+        .field select,
+        .field textarea {
+            width: 50%; 
+            padding: 8px;
+            border: 1px solid #90caf9; /* Light Blue */
+            border-radius: 4px;
+            background-color: #f0f8ff; /* Light Blue */
+        }
+        .btn {
+            background-color: #2196f3; /* Medium Blue */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #1976d2; /* Darker Medium Blue */
+        }
+    </style>
+</head>
+<body>
+
+<div class="profile">
+    <h1>Job Recruiter Profile</h1>
+    <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="field">
+        <label for="profile_picture">Company logo:</label>
+        <input type="file" id="profile_picture" name="profile_picture" accept="image/*">
+    </div>    
+    <div class="field">
+        <label for="name{{ i }}">Company Name :</label>
+        <input type="text" id="name{{ i }}" name="name{{ i }}" required>
+    </div>
+    <div class="field">
+        <label for="description{{ i }}">Description :</label>
+        <textarea id="description{{ i }}" name="description{{ i }}" rows="4"></textarea>
+    </div>
+    <div class="field">
+        <label for="job-post{{ i }}">Job post :</label>
+        <input type="text" id="job-post{{ i }}" name="job_post{{ i }}" required>
+    </div>
+    <div class="field">
+        <label for="qualification{{ i }}">Qualifications Required :</label>
+        <input type="text" id="qualification{{ i }}" name="qualifications_reqd{{ i }}" required style="width:200px;margin-left: 100px;">
+        <select id="qualifications_constraint" name="qualifications_constraint" style="width: 110px">
+            <option value="Mandatory">Mandatory</option>
+            <option value="Desired">Desired</option>
+        </select>
+    </div>
+    <div class="field">
+        <label for="skills{{ i }}">Skills Required:</label>
+        <input type="text" id="skills{{ i }}" name="skills_reqd{{ i }}" required style="width:200px;margin-left: 175px;">
+        <select id="skills" name="skills_constraint" style="width: 110px">
+            <option value="Mandatory">Mandatory</option>
+            <option value="Desired">Desired</option>
+        </select>
+    </div>
+    <div class="field">
+        <label for="experience">Experience Required:</label>
+        <input type="number" id="experience_reqd" name="experience_reqd" placeholder="Enter number of years" min="0" required style="width:175px;margin-left: 100px;">
+        <select id="exp" name="experience_constraint" style="width: 110px">
+            <option value="Mandatory">Mandatory</option>
+            <option value="Desired">Desired</option>
+        </select>
+    </div>
+    
+    <div class="field">
+        <label for="salary" style="margin-right: 175px;">Salary Provided:</label>
+        <input type="number" id="salary" name="salary_provided" placeholder="Min" min="1" style="width: 40px;">
+        <span>lpa  </span>
+    </div>
+    
+    <div class="field">
+        <label for="certificates{{ i }}">Certifications :</label>
+        <input type="text" id="certificates{{ i }}" name="certifications{{ i }}" required style="width:200px;margin-left: 175px;">
+        <select id="certificates" name="certificates_constraint" style="width: 110px">
+            <option value="Mandatory">Mandatory</option>
+            <option value="Desired">Desired</option>
+        </select>
+
+    </div>
+    <div class="field">
+        <label for="location{{ i }}">Location of job :</label>
+        <input type="text" id="location{{ i }}" name="location{{ i }}" required>
+
+    </div>
+    <div class="field">
+        <label for="work-shift{{ i }}">Work Shift :</label>
+        <select id="work-shift{{ i }}" name="work_shift{{ i }}" required>
+            <option value="Day Shift">Day Shift</option>
+            <option value="Night Shift">Night Shift</option>
+            <option value="Flexible Shift">Flexible Shift</option>
+        </select>
+
+    </div>
+    <div class="field">
+        <label for="faq_document">Upload FAQ Document (.txt):</label>
+        <input type="file" id="faq_document" name="faq_document" accept="text/plain">
+    </div>
+</div>
+<div class="field">
+    <button type="submit" class="btn btn-primary">Save Profile</button>
+</div>
+</form>
+</body>
+</html>

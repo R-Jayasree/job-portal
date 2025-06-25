@@ -1,0 +1,99 @@
+{% extends 'header.html' %}
+
+{% block title %}Job Search{% endblock %}
+
+{% block content %}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        h2 {
+            color: #2196f3; 
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        label {
+            color: #2196f3;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button[type="submit"] {
+            background-color: #2196f3; 
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-top: 15px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0e7ae6; /* Darker Blue */
+        }
+    </style>
+
+    <h2>Job Search</h2>
+    <form method="post">
+        {% csrf_token %}   
+        <div>
+            <label for="company_name">Company Name:</label>
+            <input type="text" id="company_name" name="company_name">
+        </div>
+        <div>
+            <label for="job_post">Job Post:</label>
+            <input type="text" id="job_post" name="job_post">
+        </div>
+        <div>
+            <label for="qualification">Qualifications:</label>
+            <input type="text" id="qualification" name="qualification">
+        </div>
+        <div>
+            <label for="salary">Salary Greater Than:</label>
+            <input type="number" id="salary" name="salary" min="1">
+        </div>
+        <div>
+            <label for="location">Location:</label>
+            <input type="text" id="location" name="location">
+        </div>
+        <div>
+            <label for="work_shift">Work Shift:</label>
+            <select id="work_shift" name="work_shift">
+                <option value="">Any</option>
+                <option value="Day Shift">Day Shift</option>
+                <option value="Night Shift">Night Shift</option>
+            </select>
+        </div>
+        <button type="submit">Search</button>
+    </form>
+{% endblock %}

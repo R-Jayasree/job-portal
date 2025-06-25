@@ -1,0 +1,101 @@
+{% extends 'header.html' %}
+
+{% block title %}Update Profile{% endblock %}
+
+{% block content %}
+<div class="container profile-container">
+    <h2>Update Profile</h2>
+    <form method="post" action="{% url 'updatejs' %}">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" class="form-control" value="{{ user_profile.name }}">
+        </div>
+        <div class="form-group">
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" class="form-control" value = "{{ user_profile.age }}" min="18" max="58" style="width:110px;">
+        </div>
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" class="form-control">{{ user_profile.description }}</textarea>
+        </div>
+        <div class="form-group">
+            <label for="job_post">Job Post:</label>
+            <input type="text" id="job_post" name="job_post" class="form-control" value="{{ user_profile.job_post }}">
+        </div>
+        <div class="form-group">
+            <label for="qualifications">Qualifications:</label>
+            <textarea id="qualifications" name="qualifications" class="form-control">{{ user_profile.qualifications }}</textarea>
+        </div>
+        <div class="form-group">
+            <label for="skills">Skills:</label>
+            <textarea id="skills" name="skills" class="form-control">{{ user_profile.skills }}</textarea>
+        </div>
+        <div class="form-group">
+            <label for="experience">Experience:</label>
+            <input type="number" id="experience" name="experience" class="form-control" value = "{{ user_profile.experience }}" min="0" style="width:110px;">
+        </div>
+        <div class="form-group">
+            <label for="min_salary_expected">Salary Expected:</label>
+            <input type="number" id="min_salary_expected" name="min_salary_expected" class="form-control" value="{{ user_profile.min_salary_expected }}" min="1" style="width: 110px;margin-right: 125px;">
+        </div>
+        <div class="form-group">
+            <label for="salary_constraint">Salary Constraint:</label>
+            <select id="salary_constraint" name="salary_constraint" class="form-control" style="width: 130px">
+                <option value="{{ user_profile.salary_constraint }}">{{ user_profile.salary_constraint }}</option>
+                <option value="Mandatory">Mandatory</option>
+                <option value="Desired">Desired</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="certifications">Certifications:</label>
+            <textarea id="certifications" name="certifications" class="form-control">{{ user_profile.certifications }}</textarea>
+        </div>
+        <div class="form-group">
+            <label for="location">Location:</label>
+            <input type="text" id="location" name="location" class="form-control" value="{{ user_profile.location }}">
+        </div>
+        <div class="form-group">
+            <label for="location_constraint">Location Constraint:</label>
+            <select id="location_constraint" name="location_constraint" class="form-control" style="width: 110px">
+                <option value="{{ user_profile.location_constraint }}">{{ user_profile.location_constraint }}</option>"
+                <option value="Mandatory">Mandatory</option>
+                <option value="Desired">Desired</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="work_shift">Work Shift:</label>
+            <select id="work_shift" name="work_shift" class="form-control" style="width: 140px;">
+                <option value="{{ user_profile.work_shift }}">{{ user_profile.work_shift}}</option>
+                <option value="Day Shift">Day Shift</option>
+                <option value="Night Shift">Night Shift</option>
+                <option value="Flexible Shift">Flexible Shift</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="work_shift_constraint">Work Shift Constraint:</label>
+            <select id="work_shift_constraint" name="work_shift_constraint" class="form-control" style="width: 140px">
+                <option value="{{ user_profile.work_shift_constraint}}">{{ user_profile.work_shift_constraint }}</option>
+                <option value="Mandatory">Mandatory</option>
+                <option value="Desired">Desired</option>
+            </select>
+        </div>
+        <div class="action-buttons">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <a href="{% url 'profile' %}" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+
+<style>
+    .profile-container {
+        margin-top: 20px;
+    }
+    .action-buttons {
+        margin-top: 20px;
+    }
+    .action-buttons .btn {
+        margin-right: 10px;
+    }
+</style>
+{% endblock %}

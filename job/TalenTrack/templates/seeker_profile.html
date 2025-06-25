@@ -1,0 +1,181 @@
+{% extends 'header.html' %}
+
+{% block title %}Job Seeker Profile{% endblock %}
+
+{% block content %}
+<div class="container profile-container">
+    <h2>Profile</h2>
+    <div class="profile-picture-container">
+        {% if user.profile_picture %}
+            <img src="{{ user.profile_picture.url }}" alt="Profile Picture" class="profile-picture">
+        {% else %}
+            <img src="https://static.vecteezy.com/system/resources/previews/002/318/271/original/user-profile-icon-free-vector.jpg" alt="Default Profile Picture" class="profile-picture">
+        {% endif %}
+    </div>
+    <div class="profile-info">
+        <div class="profile-group">
+            <label>Username:</label>
+            <p>{{ user.username }}</p>
+        </div>
+        <div class="profile-group">
+            <label>Email:</label>
+            <p>{{ user.email }}</p>
+        </div>
+        <div class="profile-group">
+            <label>Name:</label>
+            <p>{{ user.name }}</p>
+        </div>
+        <div class="profile-group">
+            <label>Age:</label>
+            <p>{{ user.age }} years</p>
+        </div>
+        <div class="profile-group">
+            <label>Gender:</label>
+            <p>{{ user.gender }}</p>
+        </div>
+        <div class="profile-group">
+            <label>Description:</label>
+            <textarea class="form-control" rows="4" readonly>{{ user.description }}</textarea>
+        </div>
+        <div class="profile-group">
+            <label>Job Post:</label>
+            <p>{{ user.job_post }}</p>
+        </div>
+        <div class="profile-group">
+            <label>Qualifications:</label>
+            <p>{{ user.qualifications }}</p>
+        </div>
+        <div class="profile-group">
+            <label>Skills:</label>
+            <p>{{ user.skills }}</p>
+        </div>
+        <div class="profile-group">
+            <label>Experience:</label>
+            <p>{{ user.experience }}</p>
+        </div>
+        <div class="profile-group">
+            <label>Work History:</label>
+            <textarea class="form-control" rows="4" readonly>{{ user.work_history }}</textarea>
+        </div>
+        <div class="profile-group">
+            <label>Minimum Salary Expected:</label>
+            <p>{{ user.min_salary_expected }} lpa , {{ user.salary_constraint }}</p>
+        </div>
+        <div class="profile-group">
+            <label>Certifications:</label>
+            <p>{{ user.certifications }}</p>
+        </div>
+        <div class="profile-group">
+            <label>Location:</label>
+            <p>{{ user.location }}, {{ user.location_constraint }}</p>
+        </div>
+        <div class="profile-group">
+            <label>Work Shift:</label>
+            <p>{{ user.work_shift }}, {{ user.work_shift_constraint }}</p>
+        </div>
+    </div>
+    <div class="action-buttons">
+        <a href="{% url 'update_profile' %}" class="btn btn-primary">Update</a>
+        <form method="post" action="{% url 'delete_profile' %}" style="display: inline;">
+            {% csrf_token %}
+            <button type="submit" name="delete_profile" class="btn btn-danger">Delete</button>
+        </form>
+    </div>
+        {% if confirmation_message %}
+            <div class="confirmation-prompt">
+                <p>{{ confirmation_message }}</p>
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="confirm_delete" value="yes">
+                    <button type="submit" class="btn btn-danger">Yes</button>
+                </form>
+                <form action="{% url 'profile' %}" method="get">
+                    <button type="submit" class="btn btn-secondary">Cancel</button>
+                </form>
+            </div>
+        {% endif %}
+</div>
+
+<style>
+    .profile-picture-container {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+    .profile-picture {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid #2196f3;
+    }
+    .profile-info {
+        margin-bottom: 20px;
+    }
+    .profile-group {
+        margin-bottom: 15px;
+    }
+    .profile-group label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+        color: #2196f3;
+    }
+    .profile-group p {
+        margin: 0;
+        padding: 10px;
+        background-color: rgba(128, 128, 128, 0.116);
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        color: black; 
+    }
+    .action-buttons {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: flex-end;
+    }
+    .action-buttons .btn {
+        margin-left: 10px;
+        padding: 10px 20px;
+    }
+    .btn-primary {
+        background-color: #2196f3;
+        color: white;
+        border: none;
+    }
+    .btn-primary:hover {
+        background-color: #1976d2;
+    }
+    .btn-danger {
+        background-color: #f44336;
+        color: white;
+        border: none;
+    }
+    .btn-danger:hover {
+        background-color: #d32f2f;
+    }
+    .confirmation-prompt {
+        background-color: #fff;
+        border: 1px solid #a3a2a2;
+        padding: 15px;
+        margin-top: 30px;
+        border-radius: 15px ;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+    .confirmation-prompt p {
+        margin-top: 20px;
+        font-weight: bold;
+}
+
+    .confirmation-prompt form {
+        margin-top: 10px;
+}
+
+    .confirmation-prompt .btn {
+        margin-right: 10px;
+}
+
+</style>
+{% endblock %}

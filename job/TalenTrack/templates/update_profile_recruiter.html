@@ -1,0 +1,109 @@
+{% extends 'header.html' %}
+
+{% block title %}Update Profile{% endblock %}
+
+{% block content %}
+<div class="container profile-container">
+    <h2>Update Profile</h2>
+    <form method="post" action="{% url 'updatejr' %}">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="company_name">Company Name:</label>
+            <input type="text" id="company_name" name="company_name" class="form-control" value="{{ user_profile.name }}">
+        </div>
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" class="form-control">{{ user_profile.description }}</textarea>
+        </div>
+        <div class="form-group">
+            <label for="job_post">Job Post:</label>
+            <input type="text" id="job_post" name="job_post" class="form-control" value="{{ user_profile.job_post }}">
+        </div>
+        <div class="form-group">
+            <label for="qualifications_reqd">Qualifications Required:</label>
+            <textarea id="qualifications_reqd" name="qualifications_reqd" class="form-control">{{ user_profile.qualifications_reqd }}</textarea>
+        </div>
+        <div class="form-group">
+            <label for="qualifications_constraint">Qualifications Constraint:</label>
+            <select id="qualifications_constraint" name="qualifications_constraint" class="form-control" style="width: 130px">
+                <option value="{{ user_profile.qualifications_constraint }}">{{ user_profile.qualifications_constraint }}</option>
+                <option value="Mandatory">Mandatory</option>
+                <option value="Desired">Desired</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="skills_reqd">Skills Required:</label>
+            <textarea id="skills_reqd" name="skills_reqd" class="form-control">{{ user_profile.skills_reqd }}</textarea>
+        </div>
+        <div class="form-group">
+            <label for="skills_constraint">Skills Constraint:</label>
+            <select id="skills_constraint" name="skills_constraint" class="form-control" style="width: 130px">
+                <option value="{{ user_profile.skills_constraint }}">{{ user_profile.skills_constraint }}</option>
+                <option value="Mandatory">Mandatory</option>
+                <option value="Desired">Desired</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="experience_reqd">Experience Required:</label>
+            <input type="number" id="experience_reqd" name="experience_reqd" class="form-control" value="{{ user_profile.experience_reqd }}" min="0" required style="width:130px;margin-right: 125px;">
+        </div>
+        <div class="form-group">
+            <label for="experience_constraint">Experience Constraint:</label>
+            <select id="experience_constraint" name="experience_constraint" class="form-control" style="width: 130px">
+                <option value="{{ user_profile.experience_constraint }}">{{ user_profile.experience_constraint }}</option>
+                <option value="Mandatory">Mandatory</option>
+                <option value="Desired">Desired</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="salary_provided">Salary Provided:</label>
+            <input type="number" id="salary" name="salary_provided" class="form-control" value="{{ user_profile.salary_provided }}" min="0" style="width: 130px;">
+        </div>
+        <div class="form-group">
+            <label for="certifications">Certifications Required:</label>
+            <textarea id="certifications" name="certifications" class="form-control">{{ user_profile.certifications }}</textarea>
+        </div>
+        <div class="form-group">
+            <label for="certificates_constraint">Certificates Constraint:</label>
+            <select id="certificates_constraint" name="certificates_constraint" class="form-control" style="width: 130px">
+                <option value="{{ user_profile.certificates_constraint }}">{{ user_profile.certificates_constraint }}</option>
+                <option value="Mandatory">Mandatory</option>
+                <option value="Desired">Desired</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="location">Location of Job:</label>
+            <input type="text" id="location" name="location" class="form-control" value="{{ user_profile.location }}">
+        </div>
+        <div class="form-group">
+            <label for="work_shift">Job Work Shift:</label>
+            <select id="work_shift" name="work_shift" class="form-control" style="width: 140px;">
+                <option value="{{ user_profile.work_shift }}">{{ user_profile.work_shift}}</option>
+                <option value="Day Shift">Day Shift</option>
+                <option value="Night Shift">Night Shift</option>
+                <option value="Flexible Shift">Flexible Shift</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="faq_document">Faq Document:</label>
+            <input type="file" id="faq_document" name="faq_document" accept="text/plain" class="form-control" value="{{ user_profile.faq_document }}">
+        </div>
+        <div class="action-buttons">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <a href="{% url 'profile' %}" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+
+<style>
+    .profile-container {
+        margin-top: 20px;
+    }
+    .action-buttons {
+        margin-top: 20px;
+    }
+    .action-buttons .btn {
+        margin-right: 10px;
+    }
+</style>
+{% endblock %}

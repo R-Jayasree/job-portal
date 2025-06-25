@@ -1,0 +1,173 @@
+{% extends 'header.html' %}
+
+{% block title %}Job Details{% endblock %}
+
+{% block content %}
+<div class="container profile-container">
+    <h2>Job Details</h2>
+    <div class="profile-picture-container">
+        {% if user.profile_picture %}
+            <img src="{{ user.profile_picture.url }}" alt="Profile Picture" class="profile-picture">
+        {% else %}
+            <img src="https://static.vecteezy.com/system/resources/previews/002/318/271/original/user-profile-icon-free-vector.jpg" alt="Default Profile Picture" class="profile-picture">
+        {% endif %}
+    </div>
+    <div class="profile-info">
+        <div class="profile-group">
+            <label>Username:</label>
+            <p>{{ user.username }}</p>
+        </div>
+        <div class="profile-group">
+            <label>Email:</label>
+            <p>{{ user.email }}</p>
+        </div>
+        <div class="profile-group">
+            <label>Name:</label>
+            <p>{{ user.name }}</p>
+        </div>
+        <div class="profile-group">
+            <label>Description:</label>
+            <textarea class="form-control" rows="4" readonly>{{ user.description }}</textarea>
+        </div>
+        <div class="profile-group">
+            <label>Job Post:</label>
+            <p>{{ user.job_post }}</p>
+        </div>
+        <div class="profile-group">
+            <label>Qualifications Required:</label>
+            <p>{{ user.qualifications_reqd }}</p>
+        </div>
+        <div class="profile-group">
+            <label>Qualifications Constraint:</label>
+            <p>{{ user.qualifications_constraint }}</p>
+        </div>
+        <div class="profile-group">
+            <label>Skills Required:</label>
+            <p>{{ user.skills_reqd }}</p>
+        </div>
+        <div class="profile-group">
+            <label>Skills Constraint:</label>
+            <p>{{ user.skills_constraint }}</p>
+        </div>
+        <div class="profile-group">
+            <label>Experience Required:</label>
+            <p>{{ user.experience_reqd }}</p>
+        </div>
+        <div class="profile-group">
+            <label>Experience Constraint:</label>
+            <p>{{ user.experience_constraint }}</p>
+        </div>
+        <div class="profile-group">
+            <label>Salary Provided:</label>
+            <p>{{ user.salary_provided }}</p>
+        </div>
+        <div class="profile-group">
+            <label>Certifications:</label>
+            <p>{{ user.certifications }}</p>
+        </div>
+        <div class="profile-group">
+            <label>Certificates Constraint:</label>
+            <p>{{ user.certificates_constraint }}</p>
+        </div>
+        <div class="profile-group">
+            <label>Location of Job:</label>
+            <p>{{ user.location }}</p>
+        </div>
+        <div class="profile-group">
+            <label>Job Work Shift:</label>
+            <p>{{ user.work_shift }}</p>
+        </div>
+    </div>
+    <div class="action-buttons">
+        {% if not from_search %}
+            <a href="{% url 'recommendations' %}" class="btn btn-primary"> <-- Back</a>
+        {% else %}
+            <button onclick="history.back()" class="btn btn-primary"> <-- Back</button>
+        {% endif %}
+        
+        {% if not is_applied %}
+            <form action="{% url 'apply_job' %}" method="post" class="mt-2">
+                {% csrf_token %}
+                <input type="hidden" name="job_id" value="{{ user.id }}">
+                <button type="submit" class="btn btn-success">Apply</button>
+            </form>
+        {% else %}
+            <button type="submit" class="btn btn-success">Applied</button>
+        {% endif %}
+
+        <form action="{% url 'faq' %}" method="post" class="mt-2">
+            {% csrf_token %}
+            <input type="hidden" name="job_id" value="{{ user.id }}">
+            <button type="submit" class="btn btn-primary">FAQs</button>
+        </form>
+
+        {% if not from_search %}
+            <form action="{% url 'remove' %}" method="post" class="mt-2">
+                {% csrf_token %}
+                <input type="hidden" name="remove_id" value="{{ user.id }}">
+                <button type="submit" class="btn btn-primary">Remove from recommendations</button>
+            </form>
+        {% endif %}
+
+    </div>
+    
+</div>
+<style>
+    .profile-picture-container {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+    .profile-picture {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid #2196f3;
+    }
+    .profile-info {
+        margin-bottom: 20px;
+    }
+    .profile-group {
+        margin-bottom: 15px;
+    }
+    .profile-group label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+        color: #2196f3;
+    }
+    .profile-group p {
+        margin: 0;
+        padding: 10px;
+        background-color: rgba(128, 128, 128, 0.116);
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        color: black; 
+    }
+    .action-buttons {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: flex-end;
+    }
+    .action-buttons .btn {
+        margin-left: 20px;
+        padding: 7px 20px;
+    }
+    .btn-primary {
+        background-color: #2196f3;
+        color: white;
+        border:2px solid white;
+        border-radius: 15px;
+    }
+    .btn-success {
+        color: white;
+        border:2px solid white;
+        border-radius: 15px;
+    }
+    .btn-primary:hover {
+        background-color: #1976d2;
+    }
+</style>
+{% endblock %}

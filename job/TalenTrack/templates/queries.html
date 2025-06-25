@@ -1,0 +1,40 @@
+<div class="container">
+    <div class="queries-tab">
+        <h2>FAQ Questions</h2>
+        <form method="post">
+            {% csrf_token %}
+            <ul>
+                {% for qs, ans in faqs %}
+                    {% if ans == "We will let you know, please check back after some time." %}
+                        <li>
+                            <strong>{{ qs }}</strong>
+                            <textarea id="answer_{{ qs }}" name="answer_{{ qs }}" class="form-control" placeholder="Type the answer"></textarea>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
+
+<style>
+
+    .container {
+        background-color: #f9f9f9;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin-top: 20px;
+    }
+
+    .form-control {
+            background-color: rgba(0, 0, 0, 0.1);
+            color: #000;
+        }
+    #answer {
+        width: 100%;
+        height: 100px;
+        resize: vertical;
+    }
+</style>

@@ -1,0 +1,43 @@
+{% extends 'header.html' %}
+
+{% block content %}
+<div class="container">
+    <p><strong>Notifications</strong></p>
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link {% if active_tab == 'received' %}active{% endif %}" href="{% url 'notifications' %}?tab=received" role="tab" > Received </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link {% if active_tab == 'sent' %}active{% endif %}" href="{% url 'notifications' %}?tab=sent" role="tab" > Sent </a>
+        </li>
+    </ul>
+</div>
+    {% include 'view_jobs_notifications.html' %}
+
+<style>
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    color: #495057;
+    background-color: #e7f5f8;
+    border-color: #dee2e6 #dee2e6 #fff;
+}
+
+.nav-link {
+    border: 2px solid transparent;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+}
+
+.tab-content {
+    background-color: #fff;
+    padding: 20px;
+    border: 2px solid #dee2e6;
+    border-top: none;
+}
+
+.container {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+</style>
+{% endblock %}

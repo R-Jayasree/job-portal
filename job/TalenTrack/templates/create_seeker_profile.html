@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f8ff; /* Light Blue */
+            color: #333; /* Dark text */
+        }
+        .profile {
+            max-width: 700px;
+            margin: 20px auto;
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #2196f3; /* Medium Blue */
+            margin-bottom: 20px;
+        }
+        .field {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 35px;
+        }
+        .field label {
+            font-weight: bold;
+            color: #2196f3; /* Medium Blue */
+            margin-right: 5px;
+            
+        }
+        .field input,
+        .field select,
+        .field textarea {
+            width: 50%; 
+            padding: 8px;
+            border: 1px solid #90caf9; /* Light Blue */
+            border-radius: 4px;
+            background-color: #f0f8ff; /* Light Blue */
+        }
+        .btn {
+            background-color: #2196f3; /* Medium Blue */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #1976d2; /* Darker Medium Blue */
+        }
+    </style>
+</head>
+<body>
+
+<div class="profile">
+    <h1>Job Seeker Profile</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="field">
+            <label for="profile_picture">Profile Picture:</label>
+            <input type="file" id="profile_picture" name="profile_picture" accept="image/*">
+        </div>
+        <div class="field">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div class="field">
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" min="18" max="58">
+        </div>
+        <div class="field">
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender" style="margin-right: 20px;">
+                <option value="">Select Gender</option>
+                <option value="M">Male</option>
+                <option value="F">Female</option>
+                <option value="O">Other</option>
+            </select>
+        </div>
+        <div class="field">
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" rows="4"></textarea>
+        </div>
+        <div class="field">
+            <label for="job_post">Looking for the job post of:</label>
+            <input type="text" id="job_post" name="job_post" required>
+        </div>
+        <div class="field">
+            <label for="qualifications">Qualifications:</label>
+            <input type="text" id="qualifications" name="qualifications" required>
+        </div>
+        <div class="field">
+            <label for="skills">Skills:</label>
+            <input type="text" id="skills" name="skills" required>
+        </div>
+        <div class="field">
+            <label for="experience">Experience:</label>
+            <input type="number" id="experience" name="experience" placeholder="Enter number of years" min="0" required>
+        </div>
+        <div class="field">
+            <label for="work_history">Work History:</label>
+            <textarea id="work_history" name="work_history" rows="4"></textarea>
+        </div>
+        <div class="field">
+            <label for="min_salary_expected">Salary Expected:</label>
+            <input type="number" id="min_salary_expected" name="min_salary_expected" placeholder="Min" min="1" style="width: 60px;margin-left: 125px;">
+            <span>lpa</span>
+            <select id="salary_constraint" name="salary_constraint" style="width: 110px">
+                <option value="Mandatory">Mandatory</option>
+                <option value="Desired">Desired</option>
+            </select>
+        </div>
+        <div class="field">
+            <label for="certifications">Certifications:</label>
+            <input type="text" id="certifications" name="certifications">
+        </div>
+        <div class="field">
+            <label for="location">Location of job Preferred:</label>
+            <input type="text" id="location" name="location" required style="width: 110px;">
+            <select id="location_constraint" name="location_constraint" style="width: 110px">
+                <option value="Mandatory">Mandatory</option>
+                <option value="Desired">Desired</option>
+            </select>
+        </div>
+        <div class="field">
+            <label for="work_shift">Work Shift Preferred:</label>
+            <select id="work_shift" name="work_shift" required style="width: 100px;">
+                <option value="Day Shift">Day Shift</option>
+                <option value="Night Shift">Night Shift</option>
+                <option value="Flexible Shift">Flexible Shift</option>
+            </select>
+            <select id="work_shift_constraint" name="work_shift_constraint" style="width: 110px">
+                <option value="Mandatory">Mandatory</option>
+                <option value="Desired">Desired</option>
+            </select>
+        </div>
+        <div class="field">
+            <button type="submit" class="btn btn-primary">Save Profile</button>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

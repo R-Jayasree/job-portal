@@ -1,0 +1,104 @@
+{% extends 'header.html' %}
+
+{% block title %}Job Seeker Search{% endblock %}
+
+{% block content %}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        h2 {
+            color: #2196f3; 
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        label {
+            color: #2196f3;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button[type="submit"] {
+            background-color: #2196f3; 
+            color: #fff;
+            border: none;
+            margin-top: 15px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0e7ae6; 
+        }
+    </style>
+
+    <h2>Job Seeker Search</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div>
+            <label for="job_post">Job Post:</label>
+            <input type="text" id="job_post" name="job_post">
+        </div>
+        <div>
+            <label for="qualification">Qualifications:</label>
+            <input type="text" id="qualification" name="qualification">
+        </div>
+        <div>
+            <label for="skills">Skills:</label>
+            <input type="text" id="skills" name="skills">
+        </div>
+        <div>
+            <label for="experience_min">Experience (Min):</label>
+            <input type="number" id="experience_min" name="experience_min" min="0">
+        </div>
+        <div>
+            <label for="experience_max">Experience (Max):</label>
+            <input type="number" id="experience_max" name="experience_max" min="1">
+        </div>
+        <div>
+            <label for="certifications">Certifications:</label>
+            <input type="text" id="certifications" name="certifications">
+        </div>
+        <div>
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender" style="margin-right: 20px;">
+                <option value="">Select Gender</option>
+                <option value="M">Male</option>
+                <option value="F">Female</option>
+                <option value="O">Other</option>
+            </select>
+        </div>
+        <button type="submit">Search</button>
+    </form>
+{% endblock %}

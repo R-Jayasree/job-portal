@@ -1,0 +1,125 @@
+{% extends 'header.html' %}
+
+{% block title %}Job Search{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Search Results</h2>
+    {% if not jobs %}
+        <p>No matching jobs found based on your search criteria, please check back soon.</p>
+    {% else %}
+        <div class="job-cards">
+            {% for job in jobs %}
+                <div class="card mb-4 custom-card">
+                    <div class="card-body">
+                        <div class="company-profile">
+                            <div class="profile-picture">
+                                {% if job.profile_picture %}
+                                    <img src="{{ job.profile_picture.url }}" alt="Company Profile">
+                                {% else %}
+                                    <img src="https://static.vecteezy.com/system/resources/previews/002/318/271/original/user-profile-icon-free-vector.jpg" alt="Default Profile Picture" >
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="job-details">
+                            <h5 class="card-title"><strong>Company Name: </strong>{{ job.name }}</h5>
+                            <p class="card-text"><strong>Job Post:</strong> {{ job.job_post }}</p>
+                            <form action="{% url 'details' %}?from_search=true" method="post" class="mt-2">
+                                {% csrf_token %}
+                                <input type="hidden" name="id" value="{{ job.id }}">
+                                <button type="submit" class="btn btn-primary">View details</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+<style>
+    .container {
+    width: 80%;
+    padding: 20px;
+    background-color: #c4e3fc;
+    border: 2px solid #2196f3;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(12, 12, 12, 0.1);
+}
+
+h2 {
+    color: #3d8aff;
+    font-weight: 500;
+    font-size: xx-large;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.job-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.card {
+    display: flex;
+}
+
+.custom-card {
+    background-color: #f4f9ff;
+    border: 1px solid #279dfd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center; 
+}
+
+.card-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex: 1;
+    padding: 20px;
+}
+
+.company-profile {
+    margin-right: 150px;
+    width: 150px; 
+    height: 150px; 
+    border-radius: 50%; 
+    overflow: hidden; 
+}
+.profile-picture img{
+    width: 150px;
+    height: 150px;
+    border-radius: 80%;
+    object-fit: cover;
+    border: 2px solid #2196f3;
+}
+.job-details {
+    flex: 1;
+    padding-left: 20px;
+}
+
+.card-title {
+    color: #2196f3;
+    margin-bottom: 10px;
+}
+
+.card-text {
+    margin-bottom: 5px;
+}
+
+.btn-primary {
+    margin-top: 10px;
+}
+
+.btn-success {
+    margin-top: 10px;
+}
+.job-more-details {
+    margin-top: 10px;
+}
+
+
+</style>
+{% endblock %}

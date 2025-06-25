@@ -1,0 +1,180 @@
+<!-- base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}TalentTrack{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f8ff; 
+            color: #2196f3; 
+        }
+        .header {
+            background-color: rgba(33, 150, 243, 0.9); 
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .header h1 {
+            margin: 0;
+            flex: 1;
+        }
+        .header .header-text {
+            flex: 2;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .subheading {
+            font-size: 20px;
+            font-weight: bold;
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            flex: 2;
+            justify-content: flex-end;
+        }
+        .subheading li {
+            margin-right: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .subheading li:last-child {
+            margin-right: 0;
+        }
+        .subheading li a {
+            text-decoration: none;
+            color: white;
+            display: flex;
+            align-items: center;
+        }
+        .subheading li a:hover {
+            color: #ccc;
+        }
+        .subheading li a i {
+            margin-right: 8px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8); 
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .form-control {
+            background-color: rgba(0, 0, 0, 0.1);
+            color: #000;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f0f8ff;
+        }
+        .profile-container {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .profile-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            color: #007bff;
+            font-weight: bold;
+        }
+        .form-control[readonly] {
+            background-color: #e9ecef;
+            border: 1px solid #ced4da;
+        }
+        .carousel-inner img {
+            width: 100%;
+            height: auto;
+            max-height: 500px;
+            object-fit: contain; 
+        }
+        .footer {
+            background-color: #2196f3;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .footer a {
+            color: white;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        .footer .social-icons {
+            margin-top: 10px;
+        }
+        .footer .social-icons a {
+            margin: 0 10px;
+            color: white;
+        }
+        .footer .social-icons a:hover {
+            color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>TalentTrack</h1>
+        <div class="header-text">Search your jobs or Hire employees !!!</div>
+        <ul class="subheading">
+            <li><a href="{% url 'home' %}"><i class="fas fa-home"></i>Home</a></li>
+            <li><a href="{% url 'profile' %}"><i class="fas fa-user"></i>Profile</a></li>
+            <li><a href="{% url 'recommendations' %}"><i class="fas fa-address-card"></i>Recommendations</a></li>
+            <li><a href="{% url 'search' %}"><i class="fas fa-search"></i>Search</a></li>
+            <li><a href="{% url 'notifications' %}"><i class="fas fa-bell"></i>Notifications</a></li>
+            <li><a href="{% url 'welcome' %}"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
+        </ul>
+    </div>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+    {% block footer %}
+    {% endblock %}    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
